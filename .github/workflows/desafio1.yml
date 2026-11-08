@@ -25,5 +25,7 @@ jobs:
       - name: Docker Scout
         uses: docker/scout-action@v1
         with:
-          command: cves
+          command: cves,quickview
           image: ${{ inputs.image }}:${{ inputs.tag }}
+          dockerhub-user: ${{ secrets.DOCKER_USER }}
+          dockerhub-password: ${{ secrets.DOCKER_PAT }}
