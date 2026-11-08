@@ -6,18 +6,17 @@ on:
       docker-image:
         required: true
         type: string
-        description: Docker image to be pulled
+        description: Docker image to be pulled (required)
       docker-image-tag:
-        required: true
         type: string
-        description: Docker image tag to be pulled. If not informed the tag lateste will be used.
+        description: Docker image tag to be pulled (optional). If not informed the tag lateste will be used.
 
 jobs:
   desafio1:
     runs-on: ubuntu-latest
     steps:
       - name: Docker pull image
-        run: docker pull ${{ github.event.inputs.docker-image }}
+        run: docker pull ${{ github.event.inputs.docker-image }}${{ case(github.event.inputs.docker-image-tag != '', :github.event.inputs.docker-image-tag, :latest) }}
 
       - name: List the docker images
         run: docker image ls
