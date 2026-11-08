@@ -7,6 +7,9 @@ on:
         requried: true
         type: string
         description: Docker image to be pulled
+      docker-image-tag:
+        type: string
+        description: Docker image tag to be pulled. If not informed the tag lateste will be used.
 
 jobs:
   desafio1:
@@ -17,6 +20,9 @@ jobs:
 
       - name: List the docker images
         run: docker image ls
+
+      - name: Show the tag informed
+        run: echo "${{ github.event.inputs.docker-image-tag }}"
 
 
 
