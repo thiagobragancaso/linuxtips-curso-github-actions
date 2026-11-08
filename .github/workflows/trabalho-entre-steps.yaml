@@ -1,0 +1,22 @@
+name: Vendo arquivos compartilhados entre steps
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  entre-steps:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Confere versão do ubuntu
+        run: cat /etc/os-release
+
+      - name: Exibir uma mensagem
+        run: echo "Estou fazendo o curso de Github Actions da Linuxtips" > mensagem.txt
+
+      - name: Qualquer outra coisa
+        run: ls -lha
+
+      - name: Lê conteúdo do arquivo
+        run: cat mensagem.txt
