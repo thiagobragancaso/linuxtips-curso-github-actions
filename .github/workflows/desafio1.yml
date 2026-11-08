@@ -9,13 +9,14 @@ on:
         description: Docker image to be pulled
 
 jobs:
-  runs-on: ubuntu-latest
-  steps:
-    - name: Docker pull image
-      run: docker pull ${{ github.event.inputs.docker-image }}
+  desafio1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Docker pull image
+        run: docker pull ${{ github.event.inputs.docker-image }}
 
-    - name: List the docker images
-      run: docker image ls
+      - name: List the docker images
+        run: docker image ls
 
 
 
