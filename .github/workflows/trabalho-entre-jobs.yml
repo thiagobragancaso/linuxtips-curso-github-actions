@@ -1,0 +1,45 @@
+name: Vendo arquivos compartilhados entre steps
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  job_1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Confere versão do ubuntu
+        run: cat /etc/os-release
+
+      - name: Exibir uma mensagem
+        run: echo "Estou fazendo o curso de Github Actions da Linuxtips" > ${{ github.workspace }}/mensagem.txt
+
+      - uses: actions/upload-artifact@v7
+        with:
+            name: strigus-upload
+            path: ${{ github.workspace }}/mensagem.txt
+
+  job_2:
+    runs-on: ubuntu-latest
+    needs: job_1
+    steps:
+      - name: Lista arquivos
+        run: ls -lha
+
+      - uses: actions/download-artificat@v7
+        with:
+          name: strigus-upload
+          path: strigus
+
+      - name: Vê o conteúdo do diretório
+        run: ls -lha && ls ./strigus/
+
+      - name: Move o arquivo
+        run: mv strigus/mensagem.txt . && rm -rf ./strigus
+
+      - name: Lista arquivos
+        run: ls -lha
+
+      - name: Acessa arquivo mensagem
+        run: cat mensagem.txt
