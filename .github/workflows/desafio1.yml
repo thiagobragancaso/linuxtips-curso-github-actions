@@ -1,0 +1,26 @@
+name: Workflow do Desafio 1 da Linuxtips
+
+on:
+  workflow_dispatch:
+    inputs:
+      docker-image:
+        requried: true
+        type: string
+        description: Docker image to be pulled
+
+jobs:
+  desafio1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Docker pull image
+        run: docker pull ${{ github.event.inputs.docker-image }}
+
+      - name: List the docker images
+        run: docker image ls
+
+
+
+# recebe uma imagem docker como input
+# docker pull
+# docker images
+# usar a action de escaneamento de vulnerabilidade do docker
