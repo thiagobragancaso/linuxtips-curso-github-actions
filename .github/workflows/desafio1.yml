@@ -4,10 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       docker-image:
-        requried: true
+        required: true
         type: string
         description: Docker image to be pulled
       docker-image-tag:
+        required: true
         type: string
         description: Docker image tag to be pulled. If not informed the tag lateste will be used.
 
