@@ -22,9 +22,8 @@ jobs:
       - name: List the docker images
         run: docker image ls
 
-
-
-# recebe uma imagem docker como input
-# docker pull
-# docker images
-# usar a action de escaneamento de vulnerabilidade do docker
+      - name: Docker Scout
+        uses: docker/scout-action@v1
+        with:
+          command: cves
+          image: ${{ inputs.image }}:${{ inputs.tag }}
